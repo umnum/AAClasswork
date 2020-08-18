@@ -43,8 +43,11 @@ class KnightPathFinder
         all_possible_moves
     end
 
+    require "byebug"
     def find_path(end_position)
-        @root_node.bfs(end_position).value
+        end_node = @root_node.bfs(end_position)
+        node_path = trace_path_back(end_node)
+        node_path.map {|node| node.value}
     end
 
     def build_move_tree(starting_position)
@@ -62,10 +65,27 @@ class KnightPathFinder
                 node = PolyTreeNode.new(position)
                 # set neighbor nodes to children
                 current_node.add_child(node)
+                # set current node as the parent to the neighbor children
+                node.parent = current_node
                 # add nodes to queue
                 queue.unshift(node)
             end
         end
         nil
     end
+
+    require "byebug"
+    def trace_path_back(node)
+        path = []
+        until node.value == @start_position
+            path.unshift(node)
+            node = node.parent
+        end
+        path.unshift(@root_node)
+        path
+    end
 end
+
+kpf = KnightPathFinder.new([0, 0])
+p kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
+p kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
