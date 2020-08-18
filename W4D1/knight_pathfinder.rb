@@ -1,4 +1,3 @@
-require "byebug"
 require 'set'
 require_relative './polytree_node.rb'
 class KnightPathFinder
@@ -43,7 +42,6 @@ class KnightPathFinder
         all_possible_moves
     end
 
-    require "byebug"
     def find_path(end_position)
         end_node = @root_node.bfs(end_position)
         node_path = trace_path_back(end_node)
@@ -68,13 +66,12 @@ class KnightPathFinder
                 # set current node as the parent to the neighbor children
                 node.parent = current_node
                 # add nodes to queue
-                queue.unshift(node)
+                queue.push(node)
             end
         end
         nil
     end
 
-    require "byebug"
     def trace_path_back(node)
         path = []
         until node.value == @start_position
@@ -85,7 +82,3 @@ class KnightPathFinder
         path
     end
 end
-
-kpf = KnightPathFinder.new([0, 0])
-p kpf.find_path([7, 6]) # => [[0, 0], [1, 2], [2, 4], [3, 6], [5, 5], [7, 6]]
-p kpf.find_path([6, 2]) # => [[0, 0], [1, 2], [2, 0], [4, 1], [6, 2]]
