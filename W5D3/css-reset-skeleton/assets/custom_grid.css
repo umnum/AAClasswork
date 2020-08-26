@@ -1,0 +1,23 @@
+header > img {
+}
+nav li {
+    display: inline-flex;
+}
+aside {
+    width: 33.33%;
+    float: left;
+}
+
+section {
+    width: 66.66%;
+    float: left;
+}
+
+figure > img {
+    width: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
