@@ -1,0 +1,209 @@
+//michael
+1.  Write a SQL query that, given a department name, finds all the employees
+    `name`s that are in that department.
+'nordstrom'
+'employees' table : name 'string', dept_id
+'departments' table : name 'string', id
+
+SELECT
+    employees.name
+FROM
+    employees
+JOIN
+    departments ON
+        departments.id = employees.dept_id
+WHERE
+    departments.name = 'nordstrom'
+
+
+2.  Next find the name of the employees that don't belong to any department
+
+SELECT
+    employees.name
+FROM
+    employees
+LEFT OUTER JOIN
+    departments ON
+        departments.id = employees.dept_id
+WHERE
+    employees.dept_id IS NULL
+------------------------------------
+#3
+
+# == Schema Information
+#
+# Table name: physicians
+#
+#  id   :integer          not null, primary key
+#  name :string           not null
+
+
+# Table name: appointments
+#
+#  id   :integer           not null, primary key
+#  physician_id :integer   not null
+#  patient_id :integer     not null
+
+
+# Table name: patients
+#
+#  id   :integer           not null, primary key
+#  name :string            not null
+#  primary_physician_id :integer
+
+class Patient < ApplicationRecord
+
+    belong_to :primary_physician,
+        primary_key: :id,
+        foreign_key: :primary_physician_id,
+        class_name: :Physician
+
+    has_many :appointments,
+        primary_key: :id,
+        foreign_key: :patient_id,
+        class_name: :Appointment
+end
+
+class Physician < ApplicationRecord
+
+    has_many :primary_patients,
+        primary_key: :id,
+        foreign_key: :primary_physician_id,
+        class_name: Patient
+    
+    has_many :appointments,
+        primary_key: :id,
+        foreign_key: :physician_id,
+        class_name: :Appointment
+    
+    has_many :patients,
+        through: :appointments,
+        source: :patient
+    
+    has_many :primary_patient_appointments,
+        through: :primary_patients,
+        source: :appointments
+end
+
+class Appointment < ApplicationRecord
+
+    belong_to :physician,
+        primary_key: :id,
+        foreign_key: :physician_id,
+        class_name: :Physician
+
+    belong_to :patient,
+        primary_key: :id,
+        foreign_key: :patient_id,
+        class_name: :Patient
+end
+
+
+Given all possible SQL commands order by order of query execution. (SELECT,
+DISTINCT, FROM, JOIN, WHERE, GROUP BY, HAVING, LIMIT/OFFSET, ORDER).
+
+FROM
+JOIN
+WHERE
+GROUP
+HAVING
+SELECT
+DISTINCT
+ORDER
+LIMIT
+
+
+# == Schema Information
+#
+# Table name: nobels
+#
+#  yr          :integer
+#  subject     :string
+#  winner      :string
+
+1.  In which years was the Physics prize awarded, but no Chemistry prize?
+
+SELECT
+    yr 
+FROM    
+    nobels 
+WHERE 
+    subject = 'Physics' AND yr NOT IN (
+        SELECT
+            yr 
+        FROM 
+            nobels 
+        WHERE 
+            subject = 'Chemistry'
+    )
+
+
+
+Given the following table write all the `belongs_to` and `has_many` associations
+for models based on the below table (`User`, `Game`, and `Score`)\
+
+
+# == Schema Information
+#
+# Table name: user
+#
+#  id   :integer          not null, primary key
+#  name :string           not null
+
+
+# Table name: score
+#
+#  id   :integer           not null, primary key
+#  number :integer         not null
+#  user_id :integer        not null
+#  game_id :integer        not null
+
+
+# Table name: game
+#
+#  id   :integer           not null, primary key
+#  name :string            not null
+#  game_maker_id :integer  not null
+
+
+class Score < ApplicationRecord
+
+    belongs_to :user,
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :User
+
+    belongs_to :game,
+        primary_key: :id,
+        foreign_key: :game_id,
+        class_name: :Game
+
+end
+
+class User < ApplicationRecord
+
+    has_many :games,
+        primary_key: :id,
+        foreign_key: :game_maker_id,
+        class_name: :Game
+    
+    has_many :scores,
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :User
+
+end
+
+class Game < ApplicationRecord
+
+    belong_to :game_maker,
+        primary_key: :id,
+        foreign_key: :game_maker_id,
+        class_name: :User
+
+    has_many :scores,
+        primary_key: :id,
+        foreign_key: :game_id,
+        class_name: :Score
+
+end
