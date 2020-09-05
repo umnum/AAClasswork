@@ -1,0 +1,63 @@
+
+
+<% @cats.each do |cat| %>
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="2">Look at this Cat</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Cats Name</td>
+            <td><%= cat.name %></td>
+            </tr>
+
+            <tr>
+            <td>Cats Birthday</td>
+            <td><%= cat.birth_date %></td>
+            </tr>
+            
+            <tr>
+            <td>Cats Color</td>
+            <td><%= cat.color %></td>
+            </tr>
+            
+            <tr>
+            <td>Cats Sex/Neutered</td>
+            <td><%= cat.sex %></td>
+            </tr>
+            
+            <tr>
+            <td>Cats Bio</td>
+            <td><%= cat.description %></td>
+        </tr>
+    </tbody>
+    <a href="cats/<%=cat.id%>/edit">Edit cat</a>
+</table>
+
+
+<% end %>
+
+<a href="/cats/new">Add a new cat!</a>
+
+<!--
+<h1>Look at all these cats</h1>
+
+<#% @cats.each do |cat| %>
+
+
+
+<ul>
+    <li><#%= cat.birth_date %></li>
+    <li><#%= cat.name %></li>
+    <li><#%= cat.color %></li>
+    <li><#%= cat.sex %></li>
+    <li><#%= cat.description %></li>
+</ul>
+<br>
+
+
+<#% end %>-->
+

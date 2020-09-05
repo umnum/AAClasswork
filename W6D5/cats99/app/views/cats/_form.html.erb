@@ -1,0 +1,51 @@
+
+<% if type == :new   %>
+    <% action_url = cats_url%>
+    <% button_text = 'Create Cat!'%>
+<% else %>
+    <% action_url = cat_url(cat) %>
+    <% button_text = 'Remake Cat'%>
+<% end %>
+
+
+
+<form action="<%= action_url %>" method="POST">
+<% if type == :edit  %>
+    <input type="hidden" name="_method" value="PATCH">
+<% end %>
+    <label for="name">Name:
+        <input type="text" name ="cat[name]" value = <%=cat.name %>>  
+    </label>
+<br>
+    <label for="cat[sex]">Sex:
+        <input type="radio" id="male" name="cat[sex]" value='M'>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="cat[sex]" value='F'>
+        <label for="female">Female</label>
+        <input type="radio" id="neutered" name="cat[sex]" value='N'>
+        <label for="neutered">Neutered</label>   
+    </label>
+<br>
+    <label for="color">Color</label>
+    <select id="color" name="cat[color]">
+        <option disabled <%= cat.color ? "" : "selected"%>>-- Please Select --</option>
+        <option value="black" <%= cat.color == "black" ? "selected" : ""%> >Black cat</option>
+        <option value="white" <%= cat.color == "white" ? "selected" : ""%>>White cat</option>
+        <option value="speckled" <%= cat.color == "speckled" ? "selected" : ""%>>Speckled</option>
+        <option value="calico" <%= cat.color == "calico" ? "selected" : ""%>>Calico</option>
+        <option value="orange" <%= cat.color == "orange" ? "selected" : ""%>>Orange</option>
+    </select>
+
+<br>
+    <label for="birth_date">Birthday:
+        <input type="date" name ="cat[birth_date]" value = <%= cat.birth_date %>>  
+    </label>
+<br>
+    <label for="description">Description:
+        <textarea name ="cat[description]" value = <%=cat.description %>>  </textarea>
+
+    </label>
+
+    <input type="submit" value="<%= button_text %>">
+</form>
+
