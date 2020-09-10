@@ -1,0 +1,7 @@
+<%= @band.name %>
+
+<form action="<%= band_url(@band) %>" method="POST">
+    <%= auth_token %>
+    <input type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Destroy Band">
+</form>
