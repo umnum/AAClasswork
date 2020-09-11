@@ -1,0 +1,10 @@
+
+<h1>WELCOME TO THE HOMEPAGE <% if current_user  %><%= current_user.username %> <% end %>!!</h1>
+<% @users.each do |user| %>
+<a href="<%= user_url(user) %>"><%= user.username %></a>
+
+<br>
+<% end %>
+
+
+

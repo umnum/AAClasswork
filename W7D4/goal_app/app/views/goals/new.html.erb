@@ -1,0 +1,40 @@
+<h2>New Goal</h2>
+
+<form action="<%= goals_url %>" method="POST">
+    <input type="hidden" name ="authenticity_token" value = "<%= form_authenticity_token %>">
+
+    <label>Title</label>
+    <input type="text" name = goal[title]>
+    <br>
+    <label>Details</label>
+    <input type="text" name = goal[details]>
+    <br>
+
+    <label>Visibility</label>
+    <label for="public">Public</label>
+    <input type="radio" name ="goal[visibility]" value = "true">
+    <label for="private">Private</label>
+    <input type="radio" name ="goal[visibility]" value = "false">
+       <br>
+
+
+    <label>Completed</label>
+    <label for="completed">Completed?</label>
+    <input type="radio" name ="goal[completed]" value = "true">
+    <label for="not_completed">Not Completed</label>
+    <input type="radio" name ="goal[completed]" value = "false">
+    <br>
+
+    <label>Finished</label>
+    <label for="finished">Finished!</label>
+    <input type="radio" name ="goal[finished]" value = "true">
+    <label for="not_finished">Not Finished</label>
+    <input type="radio" name ="goal[finished]" value = "false">
+       <br>
+
+    <label>Cheers</label>
+    <input type="number" name = 'goal[cheers]'>
+    <br>
+
+    <input type="submit" value = "Create Goal">
+</form>
