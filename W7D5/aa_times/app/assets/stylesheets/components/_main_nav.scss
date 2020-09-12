@@ -1,0 +1,65 @@
+.main-nav {
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.left-nav {
+    
+
+
+}
+
+.right-nav {
+    
+}
+
+.left-nav > ul,
+.right-nav > ul {
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between; 
+    width: 180px;
+
+}
+
+#gear-button {
+    font-size: 20px;
+}
+
+// .left-nav > ul > li {
+    
+//      display: flex;
+//     flex-direction: row; 
+//     justify-content: space-around; 
+   
+
+// }
+
+// .right-nav > ul > li {
+//      display: flex;
+//     flex-direction: row; 
+//     justify-content: space-around; 
+
+// }
+
+.right-nav > ul > li:last-of-type {
+
+}
+
+.left-nav > ul > li:hover,
+.right-nav > ul > li:last-of-type:hover {
+
+}
+
+.left-nav span {
+
+}
+
+
+.right-nav i {
+
+}
