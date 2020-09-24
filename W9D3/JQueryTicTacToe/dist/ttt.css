@@ -1,0 +1,33 @@
+.cell {
+list-style: none;
+background-color: blueviolet;
+height: 200px;
+width: 200px;
+border-style: solid;
+color: white;
+font-weight: bolder;
+font-size: xx-large;
+display: flex;
+justify-content: center;
+/* padding: auto; */
+/* margin: auto; */
+/* align-content: center; */
+}
+.cell:hover {
+    background-color: lightcoral;
+}
+.row{
+    display: flex; 
+
+}
+marquee {
+    font-weight: bolder;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
+#x {
+    color: red;
+}
+#o{
+    color: yellow;
+}
